@@ -21,10 +21,33 @@ int input_validation(int lower_bound, int upper_bound, string prompt, string err
     return input;
 }
 
-int main(){
-    int input = input_validation(0, 100, "Please enter a value: ", "Your value is invalid.\n\n\n");
+string input_validation(string prompt, string error_message){
 
-    cout << "The value chosen by the user is " << input << "\n\n";
+    string input;
+
+    cout << prompt;
+
+    getline(cin, input);
+
+    while(input.size() <= 0){
+        cout << error_message << "\n\n" << prompt;
+        getline(cin, input);
+    }
+
+    return input;
+
+}
+
+int main(){
+    int value = input_validation(0, 100, "Please enter a value: ", "Your value is invalid.\n\n\n");
+
+    cout << "The value chosen by the user is " << value << "\n\n";
+
+    cin.ignore();
+
+    string input = input_validation("Please enter a string: ", "Your string is invalid");
+
+    cout << "\nThe string you chose is '" << input << "'\n\n";
 
     return 0;
 
